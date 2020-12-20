@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-6">
+                <h5>Edit My Account</h5>
+            </div>
+            <div class="col-4 text-right">
+                <a style="float:right;" href="/quotes">Back</a>
+            </div>
+            <div class="col-2 text-right">
+                <a href="/logout">Log Out</a>
+            </div>
+        </div>
+        <div class="row text-danger">
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="row p-3">
+            <div class="col-6">
+                <form action="/quotes/update_account/{{this_user.id}}" method="post"> 
+                    {% csrf_token %}
+                    <p>First Name:  <input name="first_name" type="text" style="float:right; width: 60%;" value="{{this_user.first_name}}"></p>
+                    <p>Last Name:  <input name="last_name" type="text" style="float:right; width: 60%;" value="{{this_user.last_name}}"></p>
+                    <p>Email:  <input name="email" type="text" style="float:right; width: 60%;" value="{{this_user.email}}"></p>
+                    <div class="row-col text-center pt-4">
+                        <button type="submit">Update</button>
+                    </div>
+                </form>   
+            </div>
+        </div>
+    </div>
+</body>
+</html>

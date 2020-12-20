@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Quotes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-6">
+                <h5>{{some_user.first_name}} {{some_user.last_name}}'s Quotes</h5>
+            </div>
+            <div class="col-4 text-right">
+                <a style="float:right;" href="/quotes">Back</a>
+            </div>
+            <div class="col-2 text-right">
+                <a href="/logout">Log Out</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 pl-0">
+                {% for i in all_quotes%}
+                    {% if i.user.id == some_user.id %}
+                    <div class="row-col border m-3 p-2">
+                        <p>{{i.author}}: "{{i.quote}}"</p>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div> 
+    </div>   
+</body>
+</html>

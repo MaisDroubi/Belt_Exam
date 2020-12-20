@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row pt-3">
+            <div class="col-4"></div>
+            <div class="col-4 text-danger">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-6 p-5">
+                <div class="row-col text-center pb-4">
+                    <h2>Registration</h2>
+                </div>
+                <div  class="form-group">
+                    <form action="/register" method="post">
+                        {% csrf_token %}
+                        <p>First Name: <input class="form-control" name="first_name" type="text" ></p>
+                        <p>Last Name: <input class="form-control" name="last_name" type="text" ></p>
+                        <p>Email: <input class="form-control" name="email" type="text" ></p>
+                        <p>Password: <input class="form-control" name="password" type="password"></p>
+                        <p>Confirm Password: <input class="form-control" name="confirm_pw" type="password"></p>
+                        <div class="row-col text-center pt-4">
+                            <button  class="btn btn-primary" type="submit">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-6 p-5">
+                <div class="row-col text-center pb-4">
+                    <h2>Login</h2>
+                </div>
+                <div class="form-group">
+                    <form action="/login" method="post">
+                        {% csrf_token %}
+                        <p>Email: <input class="form-control" name="email" type="text" ></p>
+                        <p>Password: <input class="form-control" name="password" type="password" ></p>
+                        <div class="row-col text-center pt-4">
+                            <button  class="btn btn-primary" type="submit">Log In</button>
+                        </div>
+                    </form>
+    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
